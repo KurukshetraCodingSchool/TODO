@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const todoSchema = mongoose.Schema({
-    title:String,
+    WorkName:String,
     Description:String,
     user:{
         type:mongoose.Schema.Types.ObjectId,

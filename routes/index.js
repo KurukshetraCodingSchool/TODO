@@ -70,18 +70,18 @@ router.get('/logout', (req, res) => {
 });
 
 // Todo work
-router.get('/Todo', async function(req, res, next) {
-    const user = await userModel.findOne({username:'vikash'})
-  res.render("todo",{user})
-  console.log(user);
-  
-  
+router.get('/Todo',isloggedIn, async function(req, res, next) {
+    const user = await userModel.findOne({email:req.user.email});
+    const todo = await todoModel.find();
+  res.render("todo",{user,todo})
+  // console.log(user);
+  console.log(todo);
 });
 router.post('/Todo', async function(req, res, next) {
-  const {title, Description} = req.body
+  const {WorkName, Description} = req.body
   const task = await todoModel.create({
-    title:title,
-    Description:Description
+    WorkName,
+    Description,
   })
   res.redirect("/Todo")
   
@@ -97,4 +97,12 @@ router.post('/Todo/delete/:id', async function(req, res, next) {
   res.redirect('/Todo')
 });
 
+function isloggedIn(req, res, next) {
+if(req.cookies.token==="") res.send("You must Login ")
+  else{
+const data = jwt.verify(req.cookies.token , 'avvvvv')
+req.user = data;
+next();
+  }
+}
 module.exports = router;

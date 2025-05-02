@@ -9,10 +9,14 @@ const userSchema = mongoose.Schema({
     password:String,
     works:[
         {
-            type:mongoose.Schema.ObjectId,
+            type:mongoose.Schema.Types.ObjectId,
             ref:'work'
         }
-    ]
+    ],
+    date:{
+        type:Date,
+        default:true
+    }
 })
 const userModel = mongoose.model('user',userSchema);
 module.exports=userModel

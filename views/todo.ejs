@@ -1,28 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Todo Page</title>
-  <link rel="stylesheet" href="../stylesheets/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>To-Do App</title>
+  <link rel="stylesheet" href="../stylesheets/todo.css">
 </head>
 <body>
-  <div class="signup-box">
+
+  <div class="container">
+    <header>
+     <div class="user">
+      <img src="../images/Profile_Image/<%=user.Profile_Image.filename %>" alt="image not found">
+      <h2>Hey, <%= user.username%> 👋</h2>
+     </div>
+      <div class="logout"><a href="/logout">Logout</a></div>
+    </header>
+
+    <section class="todo-section">
+      <h1> Create Your To-Do List</h1>
+      
+      <form action="/Todo" method="post">
+        <div class="input-area">
+          <input type="text" name="WorkName" placeholder="What needs to be done?" required>
+          <input type="text" name="Description" placeholder="Description of Work.." required>
+          <button type="submit" class="add-btn">Add</button>
+        </div>
+      </form>
+
+      <!-- Tasks will appear here -->
+      <ul id="taskList">
+        <div class="tasklist">
+          <h3>Work Name</h3>
+          <h3>Desciption</h3>
+          <h3>Date&Time</h3>
+        </div>
     
-    <h2><%= user.mobile%></h2>
-    <h2> Shedule A Work</h2>
-    <form action="Todo" method="post">
-      <div class="input-group">
-        <label for="title">title"</label>
-        <input type="text" name="title" placeholder="Enter title" required />
-      </div>
-      <div class="input-group">
-        <label for="Description">Description </label>
-        <input type="text" name="Description" placeholder="Enter Description " />
-      </div>
-    
-      <button type="submit" class="signup-btn">Create Task</button>
-    </form>
+        <% todo.forEach(function(todo) { %>
+          <li>
+            <strong><%= todo.WorkName %> </strong> : &nbsp&nbsp <%= todo.Description %> &nbsp&nbsp
+            <small><%= todo.date%></small> &nbsp&nbsp
+      
+            <div class="task-actions">
+              <!-- Edit Button -->
+              <a href="/Todo/edit/<%= todo._id %>" class="edit-btn">Edit</a>
+      
+              <!-- Delete Button -->
+              <form action="/Todo/delete/<%= todo._id %>" method="POST" style="display:inline;">
+                <button type="submit" class="delete-btn">Delete</button>
+              </form>
+            </div>
+          </li>
+        <% }) %>
+      </ul>
+      
+    </section>
   </div>
+
 </body>
 </html>
