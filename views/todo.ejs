@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Todo Page</title>
+  <link rel="stylesheet" href="../stylesheets/style.css" />
+</head>
+<body>
+  <div class="signup-box">
+    
+    <h2><%= user.mobile%></h2>
+    <h2> Shedule A Work</h2>
+    <form action="Todo" method="post">
+      <div class="input-group">
+        <label for="title">title"</label>
+        <input type="text" name="title" placeholder="Enter title" required />
+      </div>
+      <div class="input-group">
+        <label for="Description">Description </label>
+        <input type="text" name="Description" placeholder="Enter Description " />
+      </div>
+    
+      <button type="submit" class="signup-btn">Create Task</button>
+    </form>
+  </div>
+</body>
+</html>

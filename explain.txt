@@ -1,0 +1,10 @@
+Information Or flow chart of next project 
+
+1. index page ---->         Home page     (attractive)
+2. Signup Page ------>      Signup form 
+3. signin / Login .....>    login page 
+4. Authentication --------> rules for restriction
+5. TODO App Main Page --------> Work And Schedule  show 
+6. entry karne ke liye todo form 
+7. Create , Update  , delete , read 
+8. if you want use multer

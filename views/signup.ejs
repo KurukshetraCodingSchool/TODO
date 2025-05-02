@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Signup Page</title>
+  <link rel="stylesheet" href="../stylesheets/style.css" />
+</head>
+<body>
+  <div class="signup-box">
+    <h2> Shedule A Work</h2>
+    <form action="Signup" method="post" enctype="multipart/form-data">
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input type="text" name="username" placeholder="Enter username" required />
+      </div>
+      <div class="input-group">
+        <label for="mobile">Mobile Number</label>
+        <input type="tel" name="mobile" placeholder="Enter mobile number" />
+      </div>
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" placeholder="Enter email"  />
+      </div>
+      <div class="input-group">
+        <label for="Profile_Image">Profile_Image</label>
+        <input type="file" name="Profile_Image" />
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" placeholder="Enter password" required />
+      </div>
+      <button type="submit" class="signup-btn">Sign Up</button>
+      <div class="login-link">
+        Already have an account? <a href="/Signin">Login here</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
