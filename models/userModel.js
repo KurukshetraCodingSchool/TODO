@@ -15,8 +15,13 @@ const userSchema = mongoose.Schema({
     ],
     date:{
         type:Date,
-        default:true
+        default:Date.now
     }
+},
+{
+    
+   timestamps: true
+    
 })
 const userModel = mongoose.model('user',userSchema);
 module.exports=userModel

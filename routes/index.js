@@ -71,30 +71,41 @@ router.get('/logout', (req, res) => {
 
 // Todo work
 router.get('/Todo',isloggedIn, async function(req, res, next) {
-    const user = await userModel.findOne({email:req.user.email});
-    const todo = await todoModel.find();
-  res.render("todo",{user,todo})
+    const user = await userModel.findOne({email:req.user.email}).populate('works');
+    // const todo = await todoModel.find();
+  res.render("todo",{user})
   // console.log(user);
-  console.log(todo);
+  // console.log(todo);
 });
-router.post('/Todo', async function(req, res, next) {
+router.post('/Todo',isloggedIn, async function(req, res, next) {
+  const user = await userModel.findOne({email:req.user.email});
   const {WorkName, Description} = req.body
   const task = await todoModel.create({
+    user:user._id,
     WorkName,
     Description,
   })
+    user.works.push(task._id);
+    await user.save()
   res.redirect("/Todo")
   
 });
-router.get('/Todo/edit/:id', async function(req, res, next) {
 
-});
-router.post('/Todo/edit/:id', async function(req, res, next) {
-
-  res.redirect("/Todo");
-});
-router.post('/Todo/delete/:id', async function(req, res, next) {
+router.post('/Todo/delete/:id',isloggedIn, async function(req, res, next) {
+  const user = await userModel.findOne({email:req.user.email});
+  // todo ko delete karo
+  await todoModel.findByIdAndDelete(req.params.id);
+  // user model se works ko delete Karne ke liye 
+  user.works = user.works.filter(taskId =>taskId.toString()  !== req.params.id);
+  console.log(user.works);
+ await user.save()  
   res.redirect('/Todo')
+});
+router.get('/Todo/edit/:id',isloggedIn, async function(req, res, next) {
+
+});
+router.post('/Todo/edit/:id',isloggedIn, async function(req, res, next) {
+  res.redirect("/Todo");
 });
 
 function isloggedIn(req, res, next) {
