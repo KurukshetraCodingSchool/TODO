@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>edit Todo</title>
-  <link rel="stylesheet" href="../stylesheets/style.css" />
+  <link rel="stylesheet" href="/stylesheets/edittodo.css" />
 </head>
 <body>
-  <form action="Todo/edit/" method="post">
-    <input type="text" value="" name="Title" placeholder="Enter Title Here" required>
-    <input type="text" value="" name="Description" placeholder="Enter Description Here" required>
-    <input type="submit" value="Create A Task">
+  <form action="/Todo/edit/<%=task._id%>" method="post">
+    <h1>Edit Task</h1>
+    <input type="text" value="<%=task.WorkName%>" name="WorkName" placeholder="Enter Title Here" required>
+    <input type="text" value="<%=task.Description%>" name="Description" placeholder="Enter Description Here" required>
+    <input type="submit" value="Update A Task">
   </form>
 </body>
 </html>

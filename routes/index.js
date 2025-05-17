@@ -101,13 +101,26 @@ router.post('/Todo/delete/:id',isloggedIn, async function(req, res, next) {
  await user.save()  
   res.redirect('/Todo')
 });
-router.get('/Todo/edit/:id',isloggedIn, async function(req, res, next) {
+
+router.get('/Todo/edit/:id', isloggedIn, async function(req, res, next) {
+   const task = await todoModel.findById(req.params.id);
+    if (!task) return res.status(404).send("Task not found");
+    res.render("edit_todo" ,{task});  // Make sure you have a view named 'edit.ejs' or similar
 
 });
-router.post('/Todo/edit/:id',isloggedIn, async function(req, res, next) {
-  res.redirect("/Todo");
+
+router.post('/Todo/edit/:id', isloggedIn, async function(req, res, next) {
+    const { WorkName, Description } = req.body;
+    await todoModel.findByIdAndUpdate(req.params.id, {
+      WorkName,
+      Description
+    });
+    res.redirect("/Todo");
 });
 
+
+
+// isloggedin function
 function isloggedIn(req, res, next) {
 if(req.cookies.token==="") res.send("You must Login ")
   else{
